@@ -41,8 +41,7 @@ namespace WEB.ApiServices
             if (responseMessage.IsSuccessStatusCode)
             {
                 var readTask = responseMessage.Content.ReadAsStringAsync().Result;
-                JObject jsonn = JObject.Parse(readTask.ToString());
-                model = JsonConvert.DeserializeObject<List<T>>(jsonn.ToString());
+                model = JsonConvert.DeserializeObject<List<T>>(readTask.ToString());
             }
 
             return model;
@@ -83,8 +82,7 @@ namespace WEB.ApiServices
                     if (responseMessage.IsSuccessStatusCode)
                     {
                         string readTask = responseMessage.Content.ReadAsStringAsync().Result;
-                        JObject json = JObject.Parse(readTask.ToString());
-                        objeto = JsonConvert.DeserializeObject<List<T>>(json.ToString());
+                        objeto = JsonConvert.DeserializeObject<List<T>>(readTask.ToString());
                     }
                     else
                     {
@@ -130,8 +128,7 @@ namespace WEB.ApiServices
                     if (responseTask.IsSuccessStatusCode)
                     {
                         string readTask = responseTask.Content.ReadAsStringAsync().Result;
-                        JObject jsonn = JObject.Parse(readTask.ToString());
-                        objeto = JsonConvert.DeserializeObject<T>(jsonn.ToString());
+                        objeto = JsonConvert.DeserializeObject<T>(readTask.ToString());
 
                     }
                     else
