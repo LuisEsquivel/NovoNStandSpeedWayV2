@@ -67,7 +67,7 @@ namespace WEB.ApiServices
 
             List<T> objeto = null;
 
-            var url = $"{CoreResources.UrlBase}{CoreResources.Prefix}/{typeof(T).Name.ToLower()}/get";
+            var url = $"{CoreResources.UrlBase}{CoreResources.Prefix}/{typeof(T).Name.ToLower()}";
 
 
             try
@@ -161,7 +161,7 @@ namespace WEB.ApiServices
 
             try
             {
-                url = $"{CoreResources.UrlBase}{CoreResources.Prefix}/{typeof(T).Name.ToLower()}/getbyid/{id}";
+                url = $"{CoreResources.UrlBase}{CoreResources.Prefix}/{typeof(T).Name.ToLower()}/{id}";
                 uri = new Uri(url);
                 client = new HttpClient();
                 var json = JsonConvert.SerializeObject(id);
