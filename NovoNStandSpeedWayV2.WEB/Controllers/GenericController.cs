@@ -49,9 +49,8 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
         }
 
         [HttpPost]
-        public string Add(T o, IFormFile Imagen, bool llevaImagen = true)
+        public string Add(T o, IFormFile Imagen,  bool llevaImagen = true)
         {
-
 
             try
             {
@@ -74,21 +73,21 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
                 //Update
                 if (o.Id != null)
                 {
-                    o.Id = "1";
-                    o.FechaAlta = DateTime.Now;
+                    var objeto = Services.GetById<T>(o.Id).FirstOrDefault();
+                    o.UsuarioRegistroID = objeto.UsuarioRegistroID;
+                    o.FechaAlta = objeto.FechaAlta;
+                    o.UsuarioModificaID = "1";
                     Services.Update<T>(o);
-                    if (Responses.StatusCode == StatusCodes.Status200OK) return GetCurrentRow(o.Id);
+                    if (Responses.StatusCode == StatusCodes.Status200OK) return "success";
                     else return Responses.Error;
                 }
 
 
                 //Insert
-                o.Id = Guid.NewGuid().ToString();
-                o.FechaAlta = DateTime.Now;
                 o.UsuarioRegistroID = "1";
                 o.UsuarioModificaID = "1";
                 Services.Insert<T>(o);
-                if (Responses.StatusCode == StatusCodes.Status200OK) return GetCurrentRow(o.Id);
+                if (Responses.StatusCode == StatusCodes.Status200OK) return "success";
                 else return Responses.Error;
             }
             catch

@@ -97,8 +97,8 @@ $(document).ready(function () {
         addImage(e);
     });
 
-    $("#ActivoBit").change(() => {
-        $("#IsActive").val($("#ActivoBit").prop("checked"));
+    $("#EstadoActivo").change(() => {
+        $("#IsActive").val($("#EstadoActivo").prop("checked"));
     });
 
     $("#EsIntegradorBit").change(() => {
@@ -331,7 +331,8 @@ async function add(urlAdd, formData, arrayColumnas, BtnAddUser = false) {
 
                 if (arrayColumnas.length > 0) {
                     Table(arrayColumnas, result, true, BtnAddUser);
-                    return;
+                    returnData = result;
+                    return returnData;
                 }
                 else { returnData = result;}
             }
@@ -602,7 +603,7 @@ async function GetById(url, id) {
             AbrirFormulario(2);
             LlenarFormulario(data);
 
-            $("#IsActive").val($("#ActivoBit").prop("checked"));
+            $("#IsActive").val($("#EstadoActivo").prop("checked"));
             $("#EsIntegrador").val($("#EsIntegradorBit").prop("checked"));
             $("#EsAdmin").val($("#EsAdminBit").prop("checked"));
 

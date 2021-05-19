@@ -37,7 +37,10 @@ function GetTraining(id) {
 
 async function Add() {
     var form = await document.getElementById("form");
-    await  window.add("/CentroDeCostos/Add", form, ["Centro de Costo", "Descripción", "Activo", "Fecha Alta"])
+    var data = await window.add("/CentroDeCostos/Add", form, ["Centro de Costo", "Descripción", "Activo", "Fecha Alta"])
+    if (data == "success") {
+        window.list("/CentroDeCostos/Listar", ["Centro de Costo", "Descripción", "Activo", "Fecha Alta"], 0, null);
+    }
 }
 
 

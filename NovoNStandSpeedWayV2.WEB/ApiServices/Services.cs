@@ -24,9 +24,9 @@ namespace WEB.ApiServices
         public static HttpResponseMessage responseMessage;
 
 
-        public static object SetStringContent<T>(T model, string Action)
+        public static object SetStringContent<T>(T model, string Action = "")
         {
-            url = $"{CoreResources.UrlBase}{ CoreResources.Prefix}/{typeof(T).Name.ToLower()}/{Action}";
+            url = $"{CoreResources.UrlBase}{ CoreResources.Prefix}/{typeof(T).Name.ToLower()}";
             var json = JsonConvert.SerializeObject(model);
             data = new StringContent(json, Encoding.UTF8, "application/json");
             client = new HttpClient();
@@ -43,6 +43,7 @@ namespace WEB.ApiServices
             {
                 var readTask = responseMessage.Content.ReadAsStringAsync().Result;
                 model = JsonConvert.DeserializeObject<T>(readTask.ToString());
+                Responses.StatusCode = (int)responseMessage.StatusCode;
             }
 
             return model;
@@ -209,7 +210,7 @@ namespace WEB.ApiServices
         {
             try
             {
-                SetStringContent<T>(model, "Post");
+                SetStringContent<T>(model);
                 responseMessage = client.PostAsync(uri, data).Result;
                 SetResponse<T>();
             }
@@ -227,7 +228,7 @@ namespace WEB.ApiServices
 
             try
             {
-                SetStringContent<T>(model, "Put");
+                SetStringContent<T>(model);
                 responseMessage = client.PutAsync(uri, data).Result;
                 SetResponse<T>();
             }
@@ -244,10 +245,10 @@ namespace WEB.ApiServices
         {
             try
             {
-                url = $"{CoreResources.UrlBase}{CoreResources.Prefix}/{typeof(T).Name.ToLower()}/delete/{id}";
+                url = $"{CoreResources.UrlBase}{CoreResources.Prefix}/{typeof(T).Name.ToLower()}{id}";
                 uri = new Uri(url);
                 client = new HttpClient();
-                responseMessage = client.GetAsync(uri).Result;
+                responseMessage = client.DeleteAsync(uri).Result;
                 SetResponse();
             }
             catch (Exception ex)
