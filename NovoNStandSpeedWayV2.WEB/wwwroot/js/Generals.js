@@ -287,12 +287,13 @@ async function add(urlAdd, formData, arrayColumnas, BtnAddUser = false) {
         return;
     }
 
+
     var returnData;
 
     await $.ajax({
         type: "POST",
         url: urlAdd,
-        data: formData,
+        data: new FormData(formData),
         contentType: false,
         processData: false,
         dataType: "json",
@@ -601,9 +602,9 @@ async function GetById(url, id) {
             AbrirFormulario(2);
             LlenarFormulario(data);
 
-            //$("#IsActive").val($("#ActivoBit").prop("checked"));
-            //$("#EsIntegrador").val($("#EsIntegradorBit").prop("checked"));
-            //$("#EsAdmin").val($("#EsAdminBit").prop("checked"));
+            $("#IsActive").val($("#ActivoBit").prop("checked"));
+            $("#EsIntegrador").val($("#EsIntegradorBit").prop("checked"));
+            $("#EsAdmin").val($("#EsAdminBit").prop("checked"));
 
         },
         error: function () {
@@ -762,7 +763,7 @@ function LimpiarFormulario() {
     if ($("#Image").length > 0) $("#Image").attr("src", "");
 }
 
-function AbrirFormulario(operacion) {
+async function AbrirFormulario(operacion) {
 
     //document.getElementById("BtnAdd").classList.add("mt-3");
     //if ($("#BtnCancelar").length > 0) {
@@ -778,19 +779,20 @@ function AbrirFormulario(operacion) {
         $("#DivIsActive").hide();
     }
 
-    //if (operacion == 2) {
-    //    $("#BtnUpdate").show();
-    //    $("#BtnAdd").hide();
-    //    $("#ModalTitle").text("Actualizar " + $("#Titulo").text());
-    //    $("#DivIsActive").show();
-    //    document.getElementById("BtnAdd").classList.remove("mt-3");
-    //    if ($("#BtnCancelar").length > 0) {
-    //     document.getElementById("BtnCancelar").classList.remove("mb-1");
-    //    }
+    if (operacion == 2) {
+        $("#BtnUpdate").show();
+        $("#BtnAdd").hide();
+        $("#ModalTitle").text("Actualizar " + $("#Titulo").text());
+        $("#DivIsActive").show();
+        document.getElementById("BtnAdd").classList.remove("mt-3");
+        if ($("#BtnCancelar").length > 0) {
+         document.getElementById("BtnCancelar").classList.remove("mb-1");
+        }
 
-    //}
+       
+    }
 
-    operacion = null;
+
     $('#Modal').modal('show')
 }
 

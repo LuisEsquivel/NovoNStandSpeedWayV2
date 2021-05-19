@@ -24,7 +24,7 @@ function GetTraining(id) {
 
 function Add() {
     var form = document.getElementById("form");
-    window.add("/Roles/Add", form, ["Id", "Nombre", "Activo", "Fecha Alta"])
+    await window.add("/Roles/Add", form, ["Id", "Nombre", "Activo", "Fecha Alta"])
 }
 
 

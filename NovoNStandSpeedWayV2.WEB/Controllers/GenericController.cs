@@ -7,16 +7,17 @@ using System.IO;
 using WEB.ApiServices;
 using NovoNStandSpeedWayV2.WEB.Helpers;
 using COMMON.Entidades;
+using System.Collections.Generic;
 
 namespace NovoNStandSpeedWayV2.WEB.Controllers
 {
-    public class GenericController<T> : Controller where T : BaseDTO 
+    public class GenericController<T> : Controller where T : BaseDTO
     {
 
         ~GenericController()
         {
-           Responses.StatusCode = 0;
-           Responses.Error = "";
+            Responses.StatusCode = 0;
+            Responses.Error = "";
         }
 
         public ActionResult Inicio()
@@ -36,9 +37,10 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
 
 
-        public virtual string GetById(T o)
+        [HttpPost]
+        public virtual string GetById(string Id)
         {
-            return JsonConvert.SerializeObject(Services.GetById<T>(o.Id).ToList());
+            return JsonConvert.SerializeObject(Services.GetById<T>(Id).ToList());
         }
 
         public string GetCurrentRow(string id)
@@ -75,7 +77,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
                     o.Id = "1";
                     o.FechaAlta = DateTime.Now;
                     Services.Update<T>(o);
-                    if (Responses.StatusCode  == StatusCodes.Status200OK) return GetCurrentRow(o.Id);
+                    if (Responses.StatusCode == StatusCodes.Status200OK) return GetCurrentRow(o.Id);
                     else return Responses.Error;
                 }
 

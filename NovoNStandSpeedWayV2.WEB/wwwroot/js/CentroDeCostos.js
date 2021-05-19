@@ -35,9 +35,9 @@ function GetTraining(id) {
 
 
 
-function Add() {
-    var form = document.getElementById("form");
-    window.add("/CentroDeCostos/Add", form, ["Centro de Costo", "Descripción", "Activo", "Fecha Alta"])
+async function Add() {
+    var form = await document.getElementById("form");
+    await  window.add("/CentroDeCostos/Add", form, ["Centro de Costo", "Descripción", "Activo", "Fecha Alta"])
 }
 
 
