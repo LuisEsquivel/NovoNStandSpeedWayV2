@@ -13,7 +13,7 @@ namespace NovoNStandSpeedWayV2.API.api
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public abstract class GenericApiController<T> : ControllerBase where T : BaseDTO
     {
         readonly IGenericManager<T> manager;
@@ -35,6 +35,7 @@ namespace NovoNStandSpeedWayV2.API.api
         [HttpGet]
 
         public ActionResult<IEnumerable<T>> Get()
+        
         {
             try
             {

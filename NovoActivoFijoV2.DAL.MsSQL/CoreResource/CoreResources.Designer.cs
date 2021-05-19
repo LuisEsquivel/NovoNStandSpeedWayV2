@@ -61,7 +61,7 @@ namespace DAL.MsSQL.CoreResource {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Data Source=192.168.210.100;Initial Catalog=NovoNStandSpeedWay;Persist Security Info=True;User ID=sa;Password=ray2010?.
+        ///   Busca una cadena traducida similar a Data Source=192.168.210.100;Initial Catalog=NovoNStandSpeedWayV2;Persist Security Info=True;User ID=sa;Password=ray2010?.
         /// </summary>
         internal static string ConectionStringLocal {
             get {

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConectionStringLocal" xml:space="preserve">
-    <value>Data Source=192.168.210.100;Initial Catalog=NovoNStandSpeedWay;Persist Security Info=True;User ID=sa;Password=ray2010?</value>
+    <value>Data Source=192.168.210.100;Initial Catalog=NovoNStandSpeedWayV2;Persist Security Info=True;User ID=sa;Password=ray2010?</value>
   </data>
   <data name="ConectionStringTemporal" xml:space="preserve">
     <value>Data Source=ntiappsecure.simple-url.com;Initial Catalog=ActivoFijoV2;Persist Security Info=True;User ID=sa;Password=ray2010?</value>

@@ -5,7 +5,7 @@
     using COMMON.Interfaces.Catalogos;
     using BIZ;
 
-    [Route("api/[controller]")]
+    [Route("api/centrocostos")]
     [ApiController]
     public class CentroCostosController : GenericApiController<CentroCostos>
     {
