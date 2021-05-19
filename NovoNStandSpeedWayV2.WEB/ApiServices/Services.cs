@@ -42,7 +42,7 @@ namespace WEB.ApiServices
             {
                 var readTask = responseMessage.Content.ReadAsStringAsync().Result;
                 JObject jsonn = JObject.Parse(readTask.ToString());
-                model = JsonConvert.DeserializeObject<List<T>>(jsonn["Model"].ToString());
+                model = JsonConvert.DeserializeObject<List<T>>(jsonn.ToString());
             }
 
             return model;
@@ -84,7 +84,7 @@ namespace WEB.ApiServices
                     {
                         string readTask = responseMessage.Content.ReadAsStringAsync().Result;
                         JObject json = JObject.Parse(readTask.ToString());
-                        objeto = JsonConvert.DeserializeObject<List<T>>(json["Model"].ToString());
+                        objeto = JsonConvert.DeserializeObject<List<T>>(json.ToString());
                     }
                     else
                     {
@@ -131,7 +131,7 @@ namespace WEB.ApiServices
                     {
                         string readTask = responseTask.Content.ReadAsStringAsync().Result;
                         JObject jsonn = JObject.Parse(readTask.ToString());
-                        objeto = JsonConvert.DeserializeObject<T>(jsonn["Model"].ToString());
+                        objeto = JsonConvert.DeserializeObject<T>(jsonn.ToString());
 
                     }
                     else
