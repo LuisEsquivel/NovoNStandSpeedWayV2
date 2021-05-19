@@ -33,7 +33,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
                 try
                 {
-                    o = Services.Get<FormaAdquisicion>("formaadquisicion").Select(
+                    o = Services.Get<FormaAdquisicion>().Select(
 
                         x => new
                         {
@@ -60,7 +60,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
                 try
                 {
-                    o = Services.Get<FormaAdquisicion>("formaadquisicion").Select(
+                    o = Services.Get<FormaAdquisicion>().Select(
 
                         x => new
                         {
@@ -89,7 +89,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
                 try
                 {
-                    o = Services.Get<FormaAdquisicion>("formaadquisicion").Select(
+                    o = Services.GetById<FormaAdquisicion>(id).Select(
 
                         x => new
                         {

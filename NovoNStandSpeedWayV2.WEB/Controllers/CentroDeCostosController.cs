@@ -34,7 +34,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                var centroConstos = Services.Get<CentroCostos>("centrodecostos");
+                var centroConstos = Services.Get<CentroCostos>();
 
 
                  list = (from c in centroConstos
@@ -61,7 +61,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                var centroConstos = Services.Get<CentroCostos>("centrodecostos");
+                var centroConstos = Services.Get<CentroCostos>();
 
                 list = (from c in centroConstos
                         select new
@@ -89,7 +89,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                var CentroDeCostos = Services.Get<CentroCostos>("centrodecostos");
+                var CentroDeCostos = Services.GetById<CentroCostos>(id);
                 o = (from c in CentroDeCostos
                      where c.Id == id
                      select new

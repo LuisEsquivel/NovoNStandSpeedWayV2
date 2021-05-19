@@ -42,7 +42,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
             object list;
             try
             {
-                list = Services.Get<Ubicaciones>("ubicaciones").Where(p => p.EstaActivo == true).Select(
+                list = Services.Get<Ubicaciones>().Where(p => p.EstaActivo == true).Select(
                     x => new
                     {
                         IID = x.Id,
@@ -87,7 +87,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
             object list;
             try
             {
-                list = Services.Get<FormaAdquisicion>("formaadquisicion").Where(p => p.EstaActivo == true).Select(
+                list = Services.Get<FormaAdquisicion>().Where(p => p.EstaActivo == true).Select(
                     x => new
                     {
                         IID = x.Id,

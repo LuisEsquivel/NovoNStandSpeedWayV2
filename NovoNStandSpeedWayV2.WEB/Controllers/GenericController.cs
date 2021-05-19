@@ -31,7 +31,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
         public T objeto(T o)
         {
-            return Services.Get<T>(o).FirstOrDefault();
+            return Services.Get<T>().FirstOrDefault();
         }
 
 

@@ -55,7 +55,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             object result = null;
 
-            var usuario = Services.Get<Usuarios>("usuarios").Where(x => x.Usuario == UsuarioVar).FirstOrDefault();
+            var usuario = Services.Get<Usuarios>().Where(x => x.Usuario == UsuarioVar).FirstOrDefault();
             if (usuario == null)
             {
                 return Json("No se encontró cuenta de Novo asociada a este correo: " + UsuarioVar + Environment.NewLine + "Verifica que el correo está bien escrito y vuelve a intentarlo");
@@ -124,7 +124,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
             if (GoogleAccount)
             {
 
-                Services.Get<Usuarios>("usuarios").Where(x => x.Usuario == o.Usuario).FirstOrDefault();
+                Services.Get<Usuarios>().Where(x => x.Usuario == o.Usuario).FirstOrDefault();
 
                 if (result == null)
                 {
@@ -160,7 +160,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
                 if (o.Id == "")
                 {
 
-                    var existe = Services.Get<Usuarios>("usuarios").
+                    var existe = Services.Get<Usuarios>().
                                  Where(
                                  x => x.Usuario == o.Usuario
                                  ).FirstOrDefault();
@@ -217,7 +217,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
             {
 
                 var UsuarioVar = g.GetCookieValue(g.CockieName);
-                var usuario = Services.Get<Usuarios>("usuarios").Where(x => x.Usuario == UsuarioVar).FirstOrDefault();
+                var usuario = Services.Get<Usuarios>().Where(x => x.Usuario == UsuarioVar).FirstOrDefault();
 
                 //if (CodigoVerificacionVar == usuario.CodigoDeVerificacionVar)
                 //{

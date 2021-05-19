@@ -33,7 +33,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                o = Services.Get<Ubicaciones>("ubicaciones").Select(
+                o = Services.Get<Ubicaciones>().Select(
 
                     x => new
                     {
@@ -60,7 +60,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                o = Services.Get<Ubicaciones>("ubicaciones").Select(
+                o = Services.Get<Ubicaciones>().Select(
 
                     x => new
                     {
@@ -89,7 +89,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                o = Services.Get<Ubicaciones>("ubicaciones").Select(
+                o = Services.GetById<Ubicaciones>(id).Select(
 
                     x => new
                     {

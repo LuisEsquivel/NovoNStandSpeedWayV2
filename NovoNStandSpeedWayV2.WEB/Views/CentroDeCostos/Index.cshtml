@@ -1,15 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "Roles";
+    ViewBag.Title = "Centro de Costos";
 }
 
-@*<link href="~/Content/Usuarios.css" rel="stylesheet" />*@
 <script src="~/js/Generals.js"></script>
 <script src="~/Jquery Form Steps/js/sweetalert.min.js"></script>
-<script src="~/js/Roles.js"></script>
-
-
-@model IEnumerable<COMMON.Entidades.Roles>
+<script src="~/js/CentroDeCostos.js"></script>
 
 
 <style>
@@ -18,14 +14,15 @@
     }
 </style>
 
-<div class="usuario" />
-
-<h5 style="display:none;" class="ml-2" id="Titulo">Roles</h5>
+<div>
+    <h5 style="display:none;" class="ml-2 mt-5" id="Titulo">Centro de Costos</h5>
+</div>
 
 
 <div id="container">
 
 </div>
+
 
 
 
@@ -47,7 +44,10 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <input class="form-control" id="RolIdInt" name="RolIdInt" placeholder="Id" readonly />
+                        <input class="form-control" id="CentroCostosIdVar" name="CentroCostosIdVar" placeholder="Id" />
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" id="Accion" name="Accion" hidden value="" />
                     </div>
 
                     <div class="col-sm-12 text-center" id="DivIsActive">
@@ -61,14 +61,10 @@
 
                     <div class="form-row">
                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 mt-3">
-                            <label for="Descripcion">Descripcion</label>
-                            <input type="text" class="form-control" id="DescripcionVar" name="DescripcionVar" placeholder="Descripcion" required maxlength="100" />
+                            <label for="DescripcionVar">Descripción</label>
+                            <input type="text" class="form-control" id="DescripcionVar" name="DescripcionVar" placeholder="Descripción" required maxlength="100" />
                         </div>
                     </div>
-
-
-
-
 
                 </div>
 
@@ -87,5 +83,4 @@
         </div>
     </div>
 </div>
-
 

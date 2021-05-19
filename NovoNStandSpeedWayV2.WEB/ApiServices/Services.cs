@@ -62,27 +62,12 @@ namespace WEB.ApiServices
         }
 
 
-        public static List<T> Get<T>(object model = null,
-                                     string id = "")
+        public static List<T> Get<T>()
         {
 
             List<T> objeto = null;
-            HttpContent content = null;
 
-
-            var method = "/get";
-            if (id.Trim().Length > 0) method = "/getbyid/" + id;
-
-
-            if (model != null)
-            {
-                method = $"{"/getbyvalues/"}";
-                var json = JsonConvert.SerializeObject(model);
-                content = new StringContent(json, Encoding.UTF8, "application/json");
-            }
-
-
-            var url = CoreResources.UrlBase + CoreResources.Prefix + "/" + typeof(T).Name + method;
+            var url = $"{CoreResources.UrlBase}{CoreResources.Prefix}/{typeof(T).Name.ToLower()}/get";
 
 
             try
@@ -92,10 +77,8 @@ namespace WEB.ApiServices
                 {
 
                     var uri = new Uri(Path.Combine(url));
-
-
-                    if (model != null) responseMessage  = client.PostAsync(uri, content).Result;
-                    else responseMessage = client.GetAsync(uri).Result;
+         
+                    responseMessage = client.GetAsync(uri).Result;
 
                     if (responseMessage.IsSuccessStatusCode)
                     {

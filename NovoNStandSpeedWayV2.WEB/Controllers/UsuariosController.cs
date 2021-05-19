@@ -77,7 +77,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                var usuarios = Services.Get<Usuarios>("usuarios");
+                var usuarios = Services.Get<Usuarios>();
 
 
                 if (g.IsAdmin() == false || VengoDeMiPerfil)
@@ -85,7 +85,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
                     usuarios = usuarios.Where(x => x.Id == g.UserId() ).ToList();
                 }
 
-                var roles = Services.Get<Roles>("roles");
+                var roles = Services.Get<Roles>();
 
                 o = (from u in usuarios
                      join r in roles on u.Id equals r.Id 
@@ -117,16 +117,16 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
             try
             {
 
-                var user = Services.Get<Usuarios>("usuarios").Where(x => x.Id == g.UserId());
+                var user = Services.Get<Usuarios>().Where(x => x.Id == g.UserId());
 
-                var usuarios = Services.Get<Usuarios>("usuarios");
+                var usuarios = Services.Get<Usuarios>();
 
                 if (g.IsAdmin() == false)
                 {
                     usuarios = usuarios.Where(x => x.Id == g.UserId()).ToList();
                 }
 
-                var roles = Services.Get<Roles>("roles");
+                var roles = Services.Get<Roles>();
 
                 list = (from u in usuarios
                         join r in roles on u.Id equals r.Id
@@ -161,7 +161,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                var usuarios = Services.Get<Usuarios>("usuarios");
+                var usuarios = Services.GetById<Usuarios>(id);
                 o = (from u in usuarios
                      where u.Id == id
                      select new
@@ -289,7 +289,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
             object list;
             try
             {
-                list = Services.Get<Roles>("roles").Where(p => p.EstaActivo == true).Select(
+                list = Services.Get<Roles>().Where(p => p.EstaActivo == true).Select(
                     x => new
                     {
                         IID = x.Id,

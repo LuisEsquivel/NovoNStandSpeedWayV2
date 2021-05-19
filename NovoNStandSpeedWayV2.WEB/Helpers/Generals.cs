@@ -90,7 +90,7 @@ namespace NovoNStandSpeedWayV2.WEB.Helpers
 
             if (UsuarioIdInt > 0)
             {
-                return Services.Get<Usuarios>("usuarios").Where(x => x.Id.ToString() == GetCookieValue(CockieName)).FirstOrDefault().EsAdmin;
+                return Services.Get<Usuarios>().Where(x => x.Id.ToString() == GetCookieValue(CockieName)).FirstOrDefault().EsAdmin;
             }
 
             return false;

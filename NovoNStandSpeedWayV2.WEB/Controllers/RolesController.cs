@@ -34,7 +34,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                o = Services.Get<Roles>("roles").Select(
+                o = Services.Get<Roles>().Select(
 
                     x => new
                     {
@@ -61,7 +61,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                o = Services.Get<Roles>("roles").Select(
+                o = Services.Get<Roles>().Select(
 
                     x => new
                     {
@@ -90,7 +90,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                o = Services.Get<Roles>("roles").Select(
+                o = Services.GetById<Roles>(id).Select(
 
                     x => new
                     {
