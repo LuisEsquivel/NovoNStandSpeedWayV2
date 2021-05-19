@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\img\footer\dribbble.svg" />
+    <None Include="wwwroot\img\footer\facebook.svg" />
+    <None Include="wwwroot\img\footer\instagram.svg" />
+    <None Include="wwwroot\img\footer\twitter.svg" />
+    <None Include="wwwroot\img\footer\whatsapp.svg" />
+    <None Include="wwwroot\img\footer\youtube.svg" />
+    <None Include="wwwroot\img\novo.PNG" />
+    <None Include="wwwroot\img\NOVO_logosmall-1.png" />
+    <None Include="wwwroot\img\portadaNovo.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NovoActivoFijoV2.COMMON\COMMON.csproj" />
+  </ItemGroup>
+
+</Project>
