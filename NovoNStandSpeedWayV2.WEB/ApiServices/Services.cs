@@ -23,6 +23,7 @@ namespace WEB.ApiServices
         public static Uri uri;
         public static HttpResponseMessage responseMessage;
 
+
         public static object SetStringContent<T>(T model, string Action)
         {
             url = $"{CoreResources.UrlBase}{ CoreResources.Prefix}/{typeof(T).Name.ToLower()}/{Action}";
@@ -41,7 +42,7 @@ namespace WEB.ApiServices
             if (responseMessage.IsSuccessStatusCode)
             {
                 var readTask = responseMessage.Content.ReadAsStringAsync().Result;
-                model = JsonConvert.DeserializeObject<List<T>>(readTask.ToString());
+                model = JsonConvert.DeserializeObject<T>(readTask.ToString());
             }
 
             return model;
@@ -161,10 +162,11 @@ namespace WEB.ApiServices
                 url = $"{CoreResources.UrlBase}{CoreResources.Prefix}/{typeof(T).Name.ToLower()}/{id}";
                 uri = new Uri(url);
                 client = new HttpClient();
-                var json = JsonConvert.SerializeObject(id);
-                data = new StringContent(json, Encoding.UTF8, "application/json");
-                responseMessage = client.PostAsync(uri, data).Result;
-                return (List<T>)SetResponse<T>();
+                responseMessage = client.GetAsync(uri).Result;
+                List<T> list = new List<T>();
+                var o = (T)SetResponse<T>();
+                list.Add(o);
+                return list;
 
             }
             catch (Exception ex)
@@ -245,9 +247,7 @@ namespace WEB.ApiServices
                 url = $"{CoreResources.UrlBase}{CoreResources.Prefix}/{typeof(T).Name.ToLower()}/delete/{id}";
                 uri = new Uri(url);
                 client = new HttpClient();
-                var json = JsonConvert.SerializeObject(id);
-                data = new StringContent(id, Encoding.UTF8, "application/json");
-                responseMessage = client.PostAsync(uri, data).Result;
+                responseMessage = client.GetAsync(uri).Result;
                 SetResponse();
             }
             catch (Exception ex)
