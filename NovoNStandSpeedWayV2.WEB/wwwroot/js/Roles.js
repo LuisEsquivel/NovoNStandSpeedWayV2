@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 function GetInfoById(id) {
-    window.GetById("/Roles/GetById", id);
+    window.GetById("/Roles/GetByID", id);
 }
 
 function ReturnData(url) {
@@ -22,9 +22,14 @@ function GetTraining(id) {
 
 
 
-function Add() {
+async function Add() {
     var form = document.getElementById("form");
-    await window.add("/Roles/Add", form, ["Id", "Nombre", "Activo", "Fecha Alta"])
+    //await window.add("/Roles/Add", form, ["Id", "Nombre", "Activo", "Fecha Alta"])
+
+    var data = await window.add("/Roles/Add", form, ["Id", "Nombre", "Activo", "Fecha Alta"])
+    if (data == "success") {
+        window.list("/Roles/Add", form, ["Id", "Nombre", "Activo", "Fecha Alta"], 0, null);
+    }
 }
 
 

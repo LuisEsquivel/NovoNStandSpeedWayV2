@@ -1,25 +1,20 @@
 ﻿
+
+
 @{
-    ViewBag.Title = "Roles";
+    ViewBag.Title = "Forma De Adquisición";
 }
-@*//<script src="~/js/Usuario.js"></script>*@
+
 <script src="~/js/Generals.js"></script>
 <script src="~/Jquery Form Steps/js/sweetalert.min.js"></script>
-<script src="~/js/Roles.js"></script>
+<script src="~/js/FormaAdquisicion.js"></script>
 
 
-@model IEnumerable<COMMON.Entidades.Roles>
+@model IEnumerable<COMMON.Entidades.FormaAdquisicion>
 
 
-<style>
-    #trsGen:hover {
-        background: #FCFFC9;
-    }
-</style>
 
-<div class="usuario" />
-
-<h5 style="display:none;" class="ml-2" id="Titulo">Roles</h5>
+<h5 style="display:none;" class="ml-2" id="Titulo">Forma De Adquisición</h5>
 
 
 <div id="container">
@@ -41,13 +36,12 @@
             </div>
 
 
-            <form method="post" id="form" class="border border-right-0 border-left-0 border-secondary rounded pt-5 pb-5">
+
+            <form method="post" id="form" class="border border-right-0 border-left-0 border-secondary rounded pb-5">
+
 
                 <div class="modal-body">
 
-                    <div class="form-group">
-                        <input class="form-control" id="Id" name="Id" placeholder="Id" readonly />
-                    </div>
 
                     <div class="col-sm-12 text-center" id="DivIsActive">
                         <input hidden type="text" id="IsActive" name="IsActive" value="true" />
@@ -58,23 +52,22 @@
                     </div>
 
 
-                    <div class="form-row">
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 mt-3">
-                            <label for="Descripcion">Descripcion</label>
-                            <input type="text" class="form-control" id="Descripcion" name="Descripcion" placeholder="Descripcion" required maxlength="100" />
-                        </div>
+                    <div class="form-group">
+                        <label for="Id">Id</label>
+                        <input class="form-control col-12" id="Id" name="Id" placeholder="Id" readonly />
                     </div>
 
 
-
-
+                    <div class="form-group mb-3">
+                        <label for="Descripcion">Descripción</label>
+                        <input type="text" class="form-control col-12" id="Descripcion" name="Descripcion" placeholder="Descripción" required maxlength="200" />
+                    </div>
 
                 </div>
 
 
-
                 <div class="modal-footer">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center mt-5">
+                    <div class="col-sm-12 text-center mt-5">
                         <button type="submit" class="btn btn-primary" id="BtnAdd" onclick="Add();">Guardar</button>
                         <button type="submit" class="btn btn-primary" id="BtnUpdate" onclick="Add();">Actualizar</button>
                         <button type="button" class="btn btn-secondary" id="BtnCancelar" data-dismiss="modal">Cancelar</button>
@@ -84,10 +77,9 @@
             </form>
 
         </div>
+
+
     </div>
+
+
 </div>
-
-
-
-
-

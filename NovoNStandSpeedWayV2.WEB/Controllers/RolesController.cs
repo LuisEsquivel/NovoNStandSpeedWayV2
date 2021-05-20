@@ -34,17 +34,18 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                o = Services.Get<Roles>().Select(
+                var roles = Services.Get<Roles>();
+                o = (from x in roles
+                     where x.EstaActivo == true
+                     select new
+                     {
+                         x.Id,
+                         x.Descripcion,
+                         IsActiveBit = x.EstaActivo != false ? "SI" : "NO",
+                         FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
+                     }).ToList();
+                
 
-                    x => new
-                    {
-                        x.Id,
-                        x.Descripcion,
-                        IsActiveBit = x.EstaActivo != false ? "SI" : "NO",
-                        FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
-                    }
-
-                    ).ToList();
             }
             catch (Exception)
             {
@@ -61,17 +62,18 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
             try
             {
-                o = Services.Get<Roles>().Select(
+                var roles = Services.Get<Roles>();
+                o = (from x in roles
+                     where x.EstaActivo == true
+                     select new
+                     {
+                         x.Id,
+                         x.Descripcion,
+                         IsActiveBit = x.EstaActivo != false ? "SI" : "NO",
+                         FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
+                     }).ToList();
 
-                    x => new
-                    {
-                        x.Id,
-                        x.Descripcion,
-                        IsActiveBit = x.EstaActivo != false ? "SI" : "NO",
-                        FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
-                    }
 
-                    ).ToList();
             }
             catch (Exception)
             {
@@ -84,23 +86,22 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
 
         [HttpPost]
-        public string GetByID(string id)
+        public override string GetById(string id)
         {
             object o;
 
             try
             {
-                o = Services.GetById<Roles>(id).Select(
-
-                    x => new
-                    {
-                        x.Id,
-                        x.Descripcion,
-                        x.EstaActivo,
-                        FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
-                    }
-
-                    ).Where(x => x.Id == id).ToList();
+                var roles = Services.Get<Roles>();
+                o = (from a in roles
+                     where a.Id == id
+                     select new
+                     {
+                         a.Id,
+                         a.Descripcion,
+                         ActivoBit = a.EstaActivo != false ? "SI" : "NO",
+                         FechaAlta = Convert.ToDateTime(a.FechaAlta).ToShortDateString()
+                     }).ToList();
             }
             catch (Exception)
             {

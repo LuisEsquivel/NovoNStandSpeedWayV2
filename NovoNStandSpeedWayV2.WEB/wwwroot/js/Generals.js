@@ -589,7 +589,7 @@ async function GetById(url, id) {
             AbrirFormulario(2);
             LlenarFormulario(data);
 
-            $("#IsActive").val($("#EstadoActivo").prop("checked"));
+            $("#IsActive").val($("#EstaActivo").prop("checked"));
             $("#EsIntegrador").val($("#EsIntegradorBit").prop("checked"));
             $("#EsAdmin").val($("#EsAdminBit").prop("checked"));
 
