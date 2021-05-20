@@ -97,8 +97,8 @@ $(document).ready(function () {
         addImage(e);
     });
 
-    $("#EstadoActivo").change(() => {
-        $("#IsActive").val($("#EstadoActivo").prop("checked"));
+    $("#EstaActivo").change(() => {
+        $("#IsActive").val($("#EstaActivo").prop("checked"));
     });
 
     $("#EsIntegradorBit").change(() => {

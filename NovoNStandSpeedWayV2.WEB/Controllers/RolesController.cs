@@ -28,88 +28,88 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
         }
 
 
-        public object Get()
-        {
-            object o;
+        //public object Get()
+        //{
+        //    object o;
 
-            try
-            {
-                var roles = Services.Get<Roles>();
-                o = (from x in roles
-                     where x.EstaActivo == true
-                     select new
-                     {
-                         x.Id,
-                         x.Descripcion,
-                         IsActiveBit = x.EstaActivo != false ? "SI" : "NO",
-                         FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
-                     }).ToList();
+        //    try
+        //    {
+        //        var roles = Services.Get<Roles>();
+        //        o = (from x in roles
+        //             where x.EstaActivo == true
+        //             select new
+        //             {
+        //                 x.Id,
+        //                 x.Descripcion,
+        //                 IsActiveBit = x.EstaActivo != false ? "SI" : "NO",
+        //                 FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
+        //             }).ToList();
                 
 
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return null;
+        //    }
 
-            return o;
-        }
-
-
-        public override string List()
-        {
-            object o;
-
-            try
-            {
-                var roles = Services.Get<Roles>();
-                o = (from x in roles
-                     where x.EstaActivo == true
-                     select new
-                     {
-                         x.Id,
-                         x.Descripcion,
-                         IsActiveBit = x.EstaActivo != false ? "SI" : "NO",
-                         FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
-                     }).ToList();
+        //    return o;
+        //}
 
 
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+        //public override string List()
+        //{
+        //    object o;
 
-            return JsonConvert.SerializeObject(o);
-        }
+        //    try
+        //    {
+        //        var roles = Services.Get<Roles>();
+        //        o = (from x in roles
+        //             where x.EstaActivo == true
+        //             select new
+        //             {
+        //                 x.Id,
+        //                 x.Descripcion,
+        //                 IsActiveBit = x.EstaActivo != false ? "SI" : "NO",
+        //                 FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
+        //             }).ToList();
+
+
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return null;
+        //    }
+
+        //    return JsonConvert.SerializeObject(o);
+        //}
 
 
 
-        [HttpPost]
-        public override string GetById(string id)
-        {
-            object o;
+        //[HttpPost]
+        //public override string GetById(string id)
+        //{
+        //    object o;
 
-            try
-            {
-                var roles = Services.Get<Roles>();
-                o = (from a in roles
-                     where a.Id == id
-                     select new
-                     {
-                         a.Id,
-                         a.Descripcion,
-                         ActivoBit = a.EstaActivo != false ? "SI" : "NO",
-                         FechaAlta = Convert.ToDateTime(a.FechaAlta).ToShortDateString()
-                     }).ToList();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+        //    try
+        //    {
+        //        var roles = Services.Get<Roles>();
+        //        o = (from a in roles
+        //             where a.Id == id
+        //             select new
+        //             {
+        //                 a.Id,
+        //                 a.Descripcion,
+        //                 ActivoBit = a.EstaActivo != false ? "SI" : "NO",
+        //                 FechaAlta = Convert.ToDateTime(a.FechaAlta).ToShortDateString()
+        //             }).ToList();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return null;
+        //    }
 
-            return JsonConvert.SerializeObject(o);
-        }
+        //    return JsonConvert.SerializeObject(o);
+        //}
 
 
     }

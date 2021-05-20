@@ -27,87 +27,87 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
         }
 
 
-        public object Get()
-        {
-            object o;
+        //public object Get()
+        //{
+        //    object o;
 
-            try
-            {
-                o = Services.Get<Ubicaciones>().Select(
+        //    try
+        //    {
+        //        o = Services.Get<Ubicaciones>().Select(
 
-                    x => new
-                    {
-                        x.Id,
-                        x.Descripcion,
-                        IsActiveBit = x.EstaActivo != false ? "SI" : "NO",
-                        FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
-                    }
+        //            x => new
+        //            {
+        //                x.Id,
+        //                x.Descripcion,
+        //                IsActiveBit = x.EstaActivo != false ? "SI" : "NO",
+        //                FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
+        //            }
 
-                    ).ToList();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+        //            ).ToList();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return null;
+        //    }
 
-            return o;
-        }
-
-
-        public override string List()
-        {
-            object o;
-
-            try
-            {
-                o = Services.Get<Ubicaciones>().Select(
-
-                    x => new
-                    {
-                        x.Id,
-                        x.Descripcion,
-                        IsActiveBit = x.EstaActivo != false ? "SI" : "NO",
-                        FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
-                    }
-
-                    ).ToList();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-            return JsonConvert.SerializeObject(o);
-        }
+        //    return o;
+        //}
 
 
+        //public override string List()
+        //{
+        //    object o;
 
-        [HttpPost]
-        public string GetByID(string id)
-        {
-            object o;
+        //    try
+        //    {
+        //        o = Services.Get<Ubicaciones>().Select(
 
-            try
-            {
-                o = Services.GetById<Ubicaciones>(id).Select(
+        //            x => new
+        //            {
+        //                x.Id,
+        //                x.Descripcion,
+        //                IsActiveBit = x.EstaActivo != false ? "SI" : "NO",
+        //                FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
+        //            }
 
-                    x => new
-                    {
-                        x.Id,
-                        x.Descripcion,
-                        x.EstaActivo,
-                        FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
-                    }
+        //            ).ToList();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return null;
+        //    }
 
-                    ).Where(x => x.Id == id).ToList();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+        //    return JsonConvert.SerializeObject(o);
+        //}
 
-            return JsonConvert.SerializeObject(o);
-        }
+
+
+        //[HttpPost]
+        //public string GetByID(string id)
+        //{
+        //    object o;
+
+        //    try
+        //    {
+        //        o = Services.GetById<Ubicaciones>(id).Select(
+
+        //            x => new
+        //            {
+        //                x.Id,
+        //                x.Descripcion,
+        //                x.EstaActivo,
+        //                FechaAlta = Convert.ToDateTime(x.FechaAlta).ToShortDateString()
+        //            }
+
+        //            ).Where(x => x.Id == id).ToList();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return null;
+        //    }
+
+        //    return JsonConvert.SerializeObject(o);
+        //}
 
 
 

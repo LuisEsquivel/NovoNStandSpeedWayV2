@@ -1,8 +1,15 @@
 ﻿
+
+var arrayCellsData = ["Id", "Descripcion", "ActivoBit", "FechaAlta"];
+var arrayColumnsTable = ["Centro de Costo", "Descripción", "Activo", "Fecha Alta"];
+
+
 //navegadores modernos
-document.addEventListener("DOMContentLoaded", function (event) {
-    window.list("/Roles/List", ["Id", "Nombre", "Activo", "Fecha Alta"], 0, null);
+document.addEventListener("DOMContentLoaded", async function (event) {
+    var data = await window.list("/Roles/List");
+    window.Table(arrayColumnsTable, data, arrayCellsData);
 });
+
 
 
 function GetInfoById(id) {

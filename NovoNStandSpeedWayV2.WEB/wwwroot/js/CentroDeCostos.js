@@ -7,7 +7,6 @@ var arrayColumnsTable = ["Centro de Costo", "Descripción", "Activo", "Fecha Alt
 //navegadores modernos
 document.addEventListener("DOMContentLoaded", async function (event) {
     var data = await window.list("/CentroDeCostos/List");
-
     window.Table(arrayColumnsTable, data, arrayCellsData);
 });
 

@@ -8,6 +8,7 @@ using WEB.ApiServices;
 using NovoNStandSpeedWayV2.WEB.Helpers;
 using COMMON.Entidades;
 using System.Collections.Generic;
+using System.Data;
 
 namespace NovoNStandSpeedWayV2.WEB.Controllers
 {
@@ -25,14 +26,15 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
             return View();
         }
 
+
         public virtual string List()
         {
-            return JsonConvert.SerializeObject(Services.Get<T>().ToList());
-        }
+            var lst = Services.Get<T>().ToList();
 
-        public T objeto(T o)
-        {
-            return Services.Get<T>().FirstOrDefault();
+            if (lst == null || lst.Count() == 0) return "{}";
+
+            return JsonConvert.SerializeObject(Data(lst));
+
         }
 
 
@@ -40,13 +42,14 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
         [HttpPost]
         public virtual string GetById(string Id)
         {
-            return JsonConvert.SerializeObject(Services.GetById<T>(Id).ToList());
+            var lst = Services.GetById<T>(Id).ToList();
+
+            if (lst == null || lst.Count() == 0) return "{}";
+
+            return JsonConvert.SerializeObject(Data(lst));
         }
 
-        public string GetCurrentRow(string id)
-        {
-            return JsonConvert.SerializeObject(Services.GetCurrentRow<T>(id).ToList());
-        }
+
 
         [HttpPost]
         public string Add(T o, string IsActive, IFormFile Imagen,  bool llevaImagen = true)
@@ -109,6 +112,47 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
             return null;
         }
 
+
+        public DataTable Data(List<T> lst)
+        {
+            DataTable dt = new DataTable();
+            DataColumn column;
+            int numberRow = 0;
+            string columnName = "";
+
+            foreach (var item in lst)
+            {
+                dt.Rows.Add(dt.NewRow());
+
+                foreach (var prop in item.GetType().GetProperties())
+                {
+
+                    columnName = prop.Name;
+                    if (columnName == "EstaActivo") columnName = "ActivoBit";
+
+
+                    if (!dt.Columns.Contains(columnName))
+                    {
+                        column = new DataColumn();
+                        column.ColumnName = columnName;
+                        dt.Columns.Add(column);
+                    }
+
+
+                    if (columnName == "FechaAlta") dt.Rows[numberRow][columnName] = Convert.ToDateTime(prop.GetValue(item).ToString()).ToShortDateString();
+                    else if (columnName == "ActivoBit") dt.Rows[numberRow][columnName] = (bool)prop.GetValue(item) == true ? "SI" : "NO";
+                    else dt.Rows[numberRow][columnName] = prop.GetValue(item);
+
+                }
+
+                numberRow++;
+
+            }
+
+
+            return dt;
+
+        }
 
 
 
