@@ -356,22 +356,17 @@ async function add(urlAdd, formData, arrayColumnas, BtnAddUser = false) {
 }
 
 
-async function list(url, arrayColumnas = "", id = 0, ClasificacionID = 0, columnaAcciones = true, BtnAddUser = true) {
+async function list(url) {
 
     var container = document.getElementById("container");
     container.innerHTML = spinner;
     centrar("container");
     var returnData;
 
-    var data = {
-        "id": id,
-        "ClasificacionID": ClasificacionID
-    }
 
     await $.ajax({
         method: "GET",
         url: url,
-        data: data, /*parámetros enviados al controlador*/
         contentType: "application/json;charset=utf-8",
         dataType: "json",
 
@@ -385,12 +380,7 @@ async function list(url, arrayColumnas = "", id = 0, ClasificacionID = 0, column
                 return;
             } else {
 
-
-                if (arrayColumnas.length > 0) {
-                    Table(arrayColumnas, datos, columnaAcciones, BtnAddUser);
-                    return;
-                }
-                else { returnData = datos }
+             returnData = datos 
             }
 
 
@@ -414,22 +404,17 @@ async function list(url, arrayColumnas = "", id = 0, ClasificacionID = 0, column
 
 
 
-function Table(arrayColumnas, data, columnaAcciones = true, BtnAddUser = true) {
+function Table(arrayColumnsTable, data, keysData, columnaAcciones = true, BtnAddUser = true) {
 
     var container = document.getElementById("container");;
     container.classList.add("container");
     var contenido = "";
 
-    var keys = Object.keys(data[0]);
 
     contenido += "<div class='justify-content-start mb-5  form-inline'>";
 
     if (BtnAddUser) {
         contenido += "<button type='button' value='NUEVO' class='btn btn-success' onclick='AbrirFormulario(1);'> <i class='fa fa-user-plus'> NUEVO</i></button>";
-    }
-
-    if (keys.includes("CapacitacionID")) {
-        contenido += "<input type='button' value='REGRESAR' class='btn btn-secondary ml-2' onclick='ShowClassification();'/>";
     }
 
     contenido += " <h2 class='ml-2 mt-2 text-center font-weight-bold' id='Title'  style='color:#F08034;' >" + $("#Titulo").text() + "</h2>"
@@ -453,9 +438,9 @@ function Table(arrayColumnas, data, columnaAcciones = true, BtnAddUser = true) {
     contenido += "<thead class='bg-dark text-white vh100'>";
     contenido += "<tr>";
 
-    for (i = 0; i < arrayColumnas.length; i++) {
+    for (i = 0; i < arrayColumnsTable.length; i++) {
 
-        var theadColumn = arrayColumnas[i];
+        var theadColumn = arrayColumnsTable[i];
 
         if (theadColumn.includes("_")) {
             theadColumn = theadColumn.replace("_", " ");
@@ -480,63 +465,64 @@ function Table(arrayColumnas, data, columnaAcciones = true, BtnAddUser = true) {
     contenido += "<tbody>";
     for (row = 0; row < data.length; row++) {
 
-        contenido += "<tr>";
+        contenido += "<tr id='"+data[row]["Id"]+"'>";
 
-        for (celda = 0; celda < keys.length; celda++) {
+        for (celda = 0; celda < keysData.length; celda++) {
 
-            var cell = keys[celda];
+            //var cell = keys[celda];
+            var cell = keysData[celda];
 
-            //if cell is an Image
+                //if cell is an Image
 
-            if (cell == "Imagen") {
-                contenido += "<td>";
-                contenido += "<img src=" + data[row][cell] + " class='img-fluid' style='width: 100px; height: 100px;'>";
-                contenido += "</td>";
-            }
-
-
-            if (!cell.includes("Imagen") && !cell.includes("Pdf") && !cell.includes("Video")) {
-                contenido += "<td>";
-                contenido += data[row][cell];
-                contenido += "</td>";
-            }
+                if (cell == "Imagen") {
+                    contenido += "<td>";
+                    contenido += "<img src=" + data[row][cell] + " class='img-fluid' style='width: 100px; height: 100px;'>";
+                    contenido += "</td>";
+                }
 
 
-
-            /*Get Id For Filter or Delete(EstadoActivo==false)*/
-            if (celda == 0) {
-                id = data[row][cell];
-
-                //verificamos si el id contiene letras y si es así lo ponemos entre comillas
-                const regex = /^[0-9]*$/;
-                if (regex.test(id) == false) { id = '"' + id + '"'; }
-
-            }
+                if (!cell.includes("Imagen") && !cell.includes("Pdf") && !cell.includes("Video")) {
+                    contenido += "<td>";
+                    contenido += data[row][cell];
+                    contenido += "</td>";
+                }
 
 
-            if (cell.includes("Pdf")) {
-                var pdf = data[row][cell];
-                contenido += "<td class='text-center'>";
-                if (pdf != null) {
-                    pdf = '"' + pdf + '"';
-                    contenido += "<img class='img' onclick='Modal(" + pdf + ");' src='../img/PDF.png'/>"
+
+                /*Get Id For Filter or Delete(EstadoActivo==false)*/
+                if (celda == 0) {
+                    id = data[row][cell];
+
+                    //verificamos si el id contiene letras y si es así lo ponemos entre comillas
+                    const regex = /^[0-9]*$/;
+                    if (regex.test(id) == false) { id = '"' + id + '"'; }
 
                 }
-                contenido += "</td>";
-            }
 
-            if (cell.includes("Video")) {
-                var video = data[row][cell];
-                contenido += "<td class='text-center'>";
 
-                if (video != null) {
-                    video = '"' + video + '"';
-                    contenido += "<img class='img p-0' onclick='Modal(" + video + ");' src='../img/iconyoutube.png' />"
+                if (cell.includes("Pdf")) {
+                    var pdf = data[row][cell];
+                    contenido += "<td class='text-center'>";
+                    if (pdf != null) {
+                        pdf = '"' + pdf + '"';
+                        contenido += "<img class='img' onclick='Modal(" + pdf + ");' src='../img/PDF.png'/>"
+
+                    }
+                    contenido += "</td>";
                 }
-                contenido += "</td>";
-            }
 
-        }
+                if (cell.includes("Video")) {
+                    var video = data[row][cell];
+                    contenido += "<td class='text-center'>";
+
+                    if (video != null) {
+                        video = '"' + video + '"';
+                        contenido += "<img class='img p-0' onclick='Modal(" + video + ");' src='../img/iconyoutube.png' />"
+                    }
+                    contenido += "</td>";
+                }
+
+        }//end for
 
 
         if (columnaAcciones) {

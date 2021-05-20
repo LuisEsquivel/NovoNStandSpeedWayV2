@@ -1,9 +1,14 @@
 ﻿
 
+var arrayCellsData = ["Id", "Descripcion", "ActivoBit", "FechaAlta"];
+var arrayColumnsTable = ["Centro de Costo", "Descripción", "Activo", "Fecha Alta"];
+
 
 //navegadores modernos
-document.addEventListener("DOMContentLoaded", function (event) {
-    window.list("/CentroDeCostos/Listar", ["Centro de Costo", "Descripción", "Activo", "Fecha Alta"], 0, null);
+document.addEventListener("DOMContentLoaded", async function (event) {
+    var data = await window.list("/CentroDeCostos/List");
+
+    window.Table(arrayColumnsTable, data, arrayCellsData);
 });
 
 document.addEventListener(("click"), () => {

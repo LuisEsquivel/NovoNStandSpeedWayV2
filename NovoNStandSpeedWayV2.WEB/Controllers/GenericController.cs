@@ -8,6 +8,7 @@ using WEB.ApiServices;
 using NovoNStandSpeedWayV2.WEB.Helpers;
 using COMMON.Entidades;
 using System.Collections.Generic;
+using System.Data;
 
 namespace NovoNStandSpeedWayV2.WEB.Controllers
 {
@@ -27,7 +28,47 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
         public virtual string List()
         {
-            return JsonConvert.SerializeObject(Services.Get<T>().ToList());
+            var list1 = Services.Get<T>().ToList();
+
+            if (list1 == null || list1.Count() == 0) return "{}";
+
+            DataTable dt = new DataTable();
+            DataColumn column;
+            int numberRow = 0;
+            string columnName = "";
+
+            foreach (var item in list1)
+            {
+                dt.Rows.Add(dt.NewRow());
+
+                foreach (var prop in item.GetType().GetProperties())
+                {
+
+                    columnName = prop.Name;
+                    if (columnName == "EstaActivo") columnName = "ActivoBit";
+
+
+                    if (!dt.Columns.Contains(columnName))
+                    {
+                        column = new DataColumn();
+                        column.ColumnName = columnName;
+                        dt.Columns.Add(column);
+                    }
+
+
+                    if (columnName == "FechaAlta") dt.Rows[numberRow][columnName] = Convert.ToDateTime(prop.GetValue(item).ToString()).ToShortDateString();
+                    else if (columnName == "ActivoBit") dt.Rows[numberRow][columnName] = prop.GetValue(item).ToString() == "true" ? "SI" : "NO";
+                    else dt.Rows[numberRow][columnName] = prop.GetValue(item);
+ 
+                }
+
+                numberRow++;
+
+            }
+
+
+            return JsonConvert.SerializeObject(dt);
+
         }
 
         public T objeto(T o)
@@ -49,7 +90,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
         }
 
         [HttpPost]
-        public string Add(T o, IFormFile Imagen,  bool llevaImagen = true)
+        public string Add(T o, IFormFile Imagen, bool llevaImagen = true)
         {
 
             try
