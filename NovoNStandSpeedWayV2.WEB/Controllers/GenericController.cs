@@ -49,8 +49,9 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
         }
 
         [HttpPost]
-        public string Add(T o, IFormFile Imagen,  bool llevaImagen = true)
+        public string Add(T o, string IsActive, IFormFile Imagen,  bool llevaImagen = true)
         {
+            o.EstaActivo = IsActive != null ? Convert.ToBoolean(IsActive) : false;
 
             try
             {
