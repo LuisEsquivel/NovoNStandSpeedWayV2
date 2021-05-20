@@ -118,85 +118,85 @@
                         }
 
 
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
 
 
-                            @{
+                        @{
 
-                                var g = new Generals();
-                                if (g.IsAdmin())
+                            var g = new Generals();
+                            if (g.IsAdmin())
+                            {
+
+                                if (url == "/Roles/index")
                                 {
-
-                                    if (url == "/Roles/index")
-                                    {
-                                        <a class="nav-link activar" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
-                                    }
-                                    else
-                                    {
-                                        <a class="nav-link" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
-                                    }
-
-
-                                    if (url == "/Usuarios/Index")
-                                    {
-                                        <a class="nav-link activar" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                                    }
-                                    else
-                                    {
-                                        <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                                    }
-
-                                }
-
-
-
-
-
-
-                                if (url == "/Lectores/Index")
-                                {
-                                    <a class="nav-link activar" asp-area="" asp-controller="Lectores" asp-action="Index">Lectores</a>
+                                    <a class="nav-link activar" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
                                 }
                                 else
                                 {
-                                    <a class="nav-link" asp-area="" asp-controller="Lectores" asp-action="Index">Lectores</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
                                 }
 
 
-                                if (url == "/FormaAdquisicion/Index")
+                                if (url == "/Usuarios/Index")
                                 {
-                                    <a class="nav-link activar" asp-area="" asp-controller="FormaAdquisicion" asp-action="Index">Forma Adquisición</a>
-                                }
-                                else
-                                {
-                                    <a class="nav-link" asp-area="" asp-controller="FormaAdquisicion" asp-action="Index">Forma Adquisición</a>
-                                }
-
-
-
-                                if (url == "/CentroDeCostos/Index")
-                                {
-                                    <a class="nav-link activar" asp-area="" asp-controller="CentroDeCostos" asp-action="Index">Centro de Costos</a>
+                                    <a class="nav-link activar" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
                                 }
                                 else
                                 {
-                                    <a class="nav-link" asp-area="" asp-controller="CentroDeCostos" asp-action="Index">Centro de Costos</a>
-                                }
-
-                                if (url == "/Ubicaciones/Index")
-                                {
-                                    <a class="nav-link activar" asp-area="" asp-controller="Ubicaciones" asp-action="Index">Ubicaciones</a>
-                                }
-                                else
-                                {
-                                    <a class="nav-link" asp-area="" asp-controller="Ubicaciones" asp-action="Index">Ubicaciones</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
                                 }
 
                             }
 
 
-                        </div>
+
+
+
+
+                            if (url == "/Lectores/Index")
+                            {
+                                <a class="nav-link activar" asp-area="" asp-controller="Lectores" asp-action="Index">Lectores</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Lectores" asp-action="Index">Lectores</a>
+                            }
+
+
+                            if (url == "/FormaAdquisicion/Index")
+                            {
+                                <a class="nav-link activar" asp-area="" asp-controller="FormaAdquisicion" asp-action="Index">Forma Adquisición</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="FormaAdquisicion" asp-action="Index">Forma Adquisición</a>
+                            }
+
+
+
+                            if (url == "/CentroDeCostos/Index")
+                            {
+                                <a class="nav-link activar" asp-area="" asp-controller="CentroDeCostos" asp-action="Index">Centro de Costos</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="CentroDeCostos" asp-action="Index">Centro de Costos</a>
+                            }
+
+                            if (url == "/Roles/Index")
+                            {
+                                <a class="nav-link activar" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
+                            }
+
+                        }
+
+
+                    </div>
                     </li>
 
 
