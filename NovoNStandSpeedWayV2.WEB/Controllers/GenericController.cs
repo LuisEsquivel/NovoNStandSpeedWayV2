@@ -29,6 +29,7 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
 
         public virtual string List()
         {
+            
             var lst = Services.Get<T>().ToList();
 
             if (lst == null || lst.Count() == 0) return "{}";

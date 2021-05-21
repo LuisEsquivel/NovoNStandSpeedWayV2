@@ -42,12 +42,15 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
             object list;
             try
             {
-                list = Services.Get<Ubicaciones>().Where(p => p.EstaActivo == true).Select(
-                    x => new
-                    {
-                        IID = x.Id,
-                        NOMBRE = x.Descripcion
-                    }).OrderBy(p => p.NOMBRE).ToList();
+                var ubicaciones = Services.Get<Ubicaciones>();
+
+                list = (from x in ubicaciones
+                        where x.EstaActivo == true
+                        select new
+                        {
+                            IID = x.Id,
+                            NOMBRE = x.Descripcion
+                        }).OrderBy(p => p.NOMBRE).ToList();
             }
             catch (Exception)
             {
@@ -58,28 +61,28 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
         }
 
 
-        //public JsonResult DropDownCentroDeCostos()
-        //{
-        //    object list;
-        //    try
-        //    {
-        //        list = services.Get<CentroCosto>("centrodecostos").Where(p => p.ActivoBit == true).Select(
-        //            x => new
-        //            {
-        //                IID = x.CentroCostosIdVar,
-        //                NOMBRE = x.DescripcionVar,
-        //                x.ActivoBit 
-        //            })
-        //            .Where(x => x.ActivoBit == true)
-        //            .OrderBy(p => p.NOMBRE).ToList();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return null;
-        //    }
+        public string DropDownCentroDeCostos()
+        {
+            object list;
+            try
+            {
+                var cCostos = Services.Get<CentroCostos>();
 
-        //    return Json(list, JsonRequestBehavior.AllowGet);
-        //}
+                list = (from x in cCostos
+                        where x.EstaActivo == true
+                        select new
+                        {
+                            IID = x.Id,
+                            NOMBRE = x.Descripcion
+                        }).OrderBy(p => p.NOMBRE).ToList();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return JsonConvert.SerializeObject(list);
+        }
 
 
         public string DropDownFormaAdquisicion()
@@ -87,15 +90,15 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
             object list;
             try
             {
-                list = Services.Get<FormaAdquisicion>().Where(p => p.EstaActivo == true).Select(
-                    x => new
-                    {
-                        IID = x.Id,
-                        NOMBRE = x.Descripcion,
-                        x.EstaActivo 
-                    })
-                    .Where(x => x.EstaActivo == true)
-                    .OrderBy(p => p.NOMBRE).ToList();
+                var formaAdquisicion = Services.Get<FormaAdquisicion>();
+
+                list = (from x in formaAdquisicion
+                        where x.EstaActivo == true
+                        select new
+                        {
+                            IID = x.Id,
+                            NOMBRE = x.Descripcion
+                        }).OrderBy(p => p.NOMBRE).ToList();
             }
             catch (Exception)
             {

@@ -40,6 +40,7 @@ namespace COMMON.Entidades
         public decimal Adicional14 { get; set; }
         public DateTime Adicional15 { get; set; }
         public DateTime Adicional16 { get; set; }
+        public string EstadoActivo { get; set; }
 
     }
 }
