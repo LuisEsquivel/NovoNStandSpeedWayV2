@@ -31,10 +31,7 @@ function GetTraining(id) {
 
 async function Add() {
     var form = document.getElementById("form");
-    var data = await window.add("/FormaAdquisicion/Add", form, ["Id", "Descripción", "Activo", "Fecha Alta"])
-    if (data == "success") {
-        window.list("/FormaAdquisicion/Add", form, ["Id", "Descripción", "Activo", "Fecha Alta"], 0, null);
-    }
+    window.add("/FormaAdquisicion/Add", form, arrayColumnsTable, true, arrayCellsData)
 }
 
 

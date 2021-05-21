@@ -204,17 +204,6 @@ function userLogeado() {
         }
     });
 
-    //$.ajax({
-    //    type: "POST",
-    //    url: "/Home/UsuarioLogeado",
-    //    contentType: false,
-    //    processData: false,
-    //    success: function (data) {
-    //        if (data.length > 0) {
-    //            document.getElementById("userLogeado").innerHTML = data;
-    //        }
-    //    }
-    //})
 }
 
 
@@ -279,7 +268,7 @@ jQuery(document).ready(function () {
 
 
 
-async function add(urlAdd, formData, arrayColumnas, BtnAddUser = false) {
+async function add(urlAdd, formData, arrayColumnas, BtnAddUser = false, arrayCellsData) {
 
 
     form.onsubmit = (e) => {
@@ -330,15 +319,14 @@ async function add(urlAdd, formData, arrayColumnas, BtnAddUser = false) {
 
 
                 if (arrayColumnas.length > 0) {
-                    Table(arrayColumnas, result, true, BtnAddUser);
-                    returnData = result;
-                    return returnData;
+                    Table(arrayColumnas, result, arrayCellsData);
                 }
-                else { returnData = result;}
+                else { returnData = result; }
             }
 
             swal(InformaciónAlmacenada, "", "success");
             CerrarFormulario();
+            return;
 
         },
         error: function () {
@@ -380,7 +368,7 @@ async function list(url) {
                 return;
             } else {
 
-             returnData = datos 
+                returnData = datos
             }
 
 
@@ -404,7 +392,7 @@ async function list(url) {
 
 
 
-function Table(arrayColumnsTable, data, keysData, columnaAcciones = true, BtnAddUser = true) {
+function Table(arrayColumnsTable, data, arrayCellsData, columnaAcciones = true, BtnAddUser = true) {
 
     var container = document.getElementById("container");;
     container.classList.add("container");
@@ -434,6 +422,15 @@ function Table(arrayColumnsTable, data, keysData, columnaAcciones = true, BtnAdd
 
 
     idTable = "Table" + $("#Titulo").text().replace(/\s+/g, "");
+
+
+    if (data.length == 1 && $("#" + idTable).length > 0) {
+        AddRow(data, idTable, arrayCellsData);
+        swal(InformaciónAlmacenada, "", "success");
+        CerrarFormulario();
+        return;
+    };
+
     contenido += "<table class='table' id='" + idTable + "' >";
     contenido += "<thead class='bg-dark text-white vh100'>";
     contenido += "<tr>";
@@ -465,62 +462,62 @@ function Table(arrayColumnsTable, data, keysData, columnaAcciones = true, BtnAdd
     contenido += "<tbody>";
     for (row = 0; row < data.length; row++) {
 
-        contenido += "<tr id='"+data[row]["Id"]+"'>";
+        contenido += "<tr id='" + data[row]["Id"] + "'>";
 
-        for (celda = 0; celda < keysData.length; celda++) {
+        for (celda = 0; celda < arrayCellsData.length; celda++) {
 
             //var cell = keys[celda];
-            var cell = keysData[celda];
+            var cell = arrayCellsData[celda];
 
-                //if cell is an Image
+            //if cell is an Image
 
-                if (cell == "Imagen") {
-                    contenido += "<td>";
-                    contenido += "<img src=" + data[row][cell] + " class='img-fluid' style='width: 100px; height: 100px;'>";
-                    contenido += "</td>";
+            if (cell == "Imagen") {
+                contenido += "<td>";
+                contenido += "<img src=" + data[row][cell] + " class='img-fluid' style='width: 100px; height: 100px;'>";
+                contenido += "</td>";
+            }
+
+
+            if (!cell.includes("Imagen") && !cell.includes("Pdf") && !cell.includes("Video")) {
+                contenido += "<td>";
+                contenido += data[row][cell];
+                contenido += "</td>";
+            }
+
+
+
+            /*Get Id For Filter or Delete(EstadoActivo==false)*/
+            if (celda == 0) {
+                id = data[row][cell];
+
+                //verificamos si el id contiene letras y si es así lo ponemos entre comillas
+                const regex = /^[0-9]*$/;
+                if (regex.test(id) == false) { id = '"' + id + '"'; }
+
+            }
+
+
+            if (cell.includes("Pdf")) {
+                var pdf = data[row][cell];
+                contenido += "<td class='text-center'>";
+                if (pdf != null) {
+                    pdf = '"' + pdf + '"';
+                    contenido += "<img class='img' onclick='Modal(" + pdf + ");' src='../img/PDF.png'/>"
+
                 }
+                contenido += "</td>";
+            }
 
+            if (cell.includes("Video")) {
+                var video = data[row][cell];
+                contenido += "<td class='text-center'>";
 
-                if (!cell.includes("Imagen") && !cell.includes("Pdf") && !cell.includes("Video")) {
-                    contenido += "<td>";
-                    contenido += data[row][cell];
-                    contenido += "</td>";
+                if (video != null) {
+                    video = '"' + video + '"';
+                    contenido += "<img class='img p-0' onclick='Modal(" + video + ");' src='../img/iconyoutube.png' />"
                 }
-
-
-
-                /*Get Id For Filter or Delete(EstadoActivo==false)*/
-                if (celda == 0) {
-                    id = data[row][cell];
-
-                    //verificamos si el id contiene letras y si es así lo ponemos entre comillas
-                    const regex = /^[0-9]*$/;
-                    if (regex.test(id) == false) { id = '"' + id + '"'; }
-
-                }
-
-
-                if (cell.includes("Pdf")) {
-                    var pdf = data[row][cell];
-                    contenido += "<td class='text-center'>";
-                    if (pdf != null) {
-                        pdf = '"' + pdf + '"';
-                        contenido += "<img class='img' onclick='Modal(" + pdf + ");' src='../img/PDF.png'/>"
-
-                    }
-                    contenido += "</td>";
-                }
-
-                if (cell.includes("Video")) {
-                    var video = data[row][cell];
-                    contenido += "<td class='text-center'>";
-
-                    if (video != null) {
-                        video = '"' + video + '"';
-                        contenido += "<img class='img p-0' onclick='Modal(" + video + ");' src='../img/iconyoutube.png' />"
-                    }
-                    contenido += "</td>";
-                }
+                contenido += "</td>";
+            }
 
         }//end for
 
@@ -636,7 +633,7 @@ async function DeleteById(url, id) {
 
                     success: function (data) {
 
-             
+
                         if (data == "deleted") {
                             var itemId = id.toString() + id.toString();
                             if (data == "deleted") {
@@ -773,10 +770,10 @@ async function AbrirFormulario(operacion) {
         $("#DivIsActive").show();
         document.getElementById("BtnAdd").classList.remove("mt-3");
         if ($("#BtnCancelar").length > 0) {
-         document.getElementById("BtnCancelar").classList.remove("mb-1");
+            document.getElementById("BtnCancelar").classList.remove("mb-1");
         }
 
-       
+
     }
 
 
@@ -1182,4 +1179,51 @@ async function SignInGoogle(profile) {
 var Registers = false;
 function Registrar() {
     Registers = true;
+}
+
+
+
+function AddRow(data, idTable, arrayCellsData) {
+
+
+    if (data == null || data.length == 0) { return; }
+
+    var Id = '"'+ data[0]["Id"] +'"' ;
+    var ColumnEdit = "<div class='text-center'> ";
+    ColumnEdit += "<button id='BtnEditar' class='editar btn btn-secondary btn-sm  redondo' onclick='GetInfoById(" + Id + ");'>  <i class='fa fa-pencil-square-o fa-lg' aria-hidden='true'></i></button> ";
+    ColumnEdit += "</div>";
+
+    var table = document.getElementById(idTable);
+
+    if ($("#" + data[0]["Id"]).length > 0) {
+        document.getElementById(data[0]["Id"]).remove();
+    }
+
+
+    var newRow = table.insertRow(1);
+    var numberCell = 0;
+
+    for (var i = 0; i < arrayCellsData.length; i++) {
+
+        newRow.insertCell(numberCell);
+        var item = arrayCellsData[i];
+        var newText = data[0][item];
+
+
+        alert(data[0][item]);
+
+        table.rows[1].cells[numberCell].innerHTML = newText;
+
+        numberCell++;
+    }
+
+
+    newRow.insertCell(numberCell);
+    table.rows[1].cells[numberCell].innerHTML = ColumnEdit;
+
+    var tr = table.rows[1];   
+    var att = document.createAttribute("id");       
+    att.value = data[0]["Id"];                           
+    tr.setAttributeNode(att);   
+
 }

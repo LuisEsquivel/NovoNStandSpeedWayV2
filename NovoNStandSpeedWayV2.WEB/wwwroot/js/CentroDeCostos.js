@@ -33,37 +33,10 @@ function ReturnData(url) {
 }
 
 
-function GetTraining(id) {
-    window.list("/CentroDeCostos/List", ["Centro de Costo", "Descripción", "Activo", "Fecha Alta"], 0, null);
-}
-
-
 
 async function Add() {
     var form = await document.getElementById("form");
-    var data = await window.add("/CentroDeCostos/Add", form, ["Centro de Costo", "Descripción", "Activo", "Fecha Alta"])
-    if (data == "success") {
-        window.list("/CentroDeCostos/Listar", ["Centro de Costo", "Descripción", "Activo", "Fecha Alta"], 0, null);
-    }
-}
-
-
-//function ChangeInfoStatus(id) {
-//    window.ChangeStatus("/CentroDeCostos/ChangeStatus", id, ["Centro de Costo", "Descripción", "Activo", "Fecha Alta"]);
-//}
-
-
-function Modal(url) {
-    window.AbrirModal(url);
-}
-
-
-function Cerrar() {
-
-    $('#Modal iframe').attr('src', '');
-    $("#Modal").modal("hide");
-    window.modal_open = false;
-
+    window.add("/CentroDeCostos/Add", form, arrayColumnsTable, true, arrayCellsData)
 }
 
 

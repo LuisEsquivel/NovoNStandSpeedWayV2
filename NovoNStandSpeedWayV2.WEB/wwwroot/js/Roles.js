@@ -16,33 +16,13 @@ function GetInfoById(id) {
     window.GetById("/Roles/GetByID", id);
 }
 
-function ReturnData(url) {
-    return $.ajax({
-        url: url
-    });
-}
-
-
-function GetTraining(id) {
-    window.list("/Roles/List", ["Id", "Nombre", "Activo", "Fecha Alta"], 0, null);
-}
-
 
 
 async function Add() {
     var form = document.getElementById("form");
-    //await window.add("/Roles/Add", form, ["Id", "Nombre", "Activo", "Fecha Alta"])
-
-    var data = await window.add("/Roles/Add", form, ["Id", "Nombre", "Activo", "Fecha Alta"])
-    if (data == "success") {
-        window.list("/Roles/Add", form, ["Id", "Nombre", "Activo", "Fecha Alta"], 0, null);
-    }
+    await window.add("/Roles/Add", form, arrayColumnsTable, true, arrayCellsData)
 }
 
-
-function ChangeInfoStatus(id) {
-    window.ChangeStatus("/TipoDeSeguimiento/ChangeStatus", id, ["Id", "Nombre", "Activo", "Fecha Alta"]);
-}
 
 
 function Modal(url) {

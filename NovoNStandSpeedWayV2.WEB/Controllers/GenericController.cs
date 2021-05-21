@@ -81,8 +81,8 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
                     o.UsuarioRegistroID = objeto.UsuarioRegistroID;
                     o.FechaAlta = objeto.FechaAlta;
                     o.UsuarioModificaID = "1";
-                    Services.Update<T>(o);
-                    if (Responses.StatusCode == StatusCodes.Status200OK) return "success";
+                    var rowAdded = Data( Services.Update<T>(o) );
+                    if (Responses.StatusCode == StatusCodes.Status200OK) return JsonConvert.SerializeObject(rowAdded);
                     else return Responses.Error;
                 }
 
@@ -90,8 +90,8 @@ namespace NovoNStandSpeedWayV2.WEB.Controllers
                 //Insert
                 o.UsuarioRegistroID = "1";
                 o.UsuarioModificaID = "1";
-                Services.Insert<T>(o);
-                if (Responses.StatusCode == StatusCodes.Status200OK) return "success";
+                var rowModified = Data(Services.Insert<T>(o));
+                if (Responses.StatusCode == StatusCodes.Status200OK) return JsonConvert.SerializeObject(rowModified);
                 else return Responses.Error;
             }
             catch

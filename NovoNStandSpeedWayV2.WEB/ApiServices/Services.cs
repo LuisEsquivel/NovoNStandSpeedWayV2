@@ -206,36 +206,42 @@ namespace WEB.ApiServices
 
 
 
-        public static void Insert<T>(T model)
+        public static List<T> Insert<T>(T model)
         {
             try
             {
                 SetStringContent<T>(model);
                 responseMessage = client.PostAsync(uri, data).Result;
-                SetResponse<T>();
+                List<T> lst = new List<T>();
+                lst.Add((T)SetResponse<T>());
+                return lst;
             }
             catch (Exception ex)
             {
                 Responses.StatusCode = (int)responseMessage.StatusCode;
                 Responses.Error = ex.ToString();
+                return null;
             }
 
         }
 
 
-        public static void Update<T>(T model)
+        public static List<T> Update<T>(T model)
         {
 
             try
             {
                 SetStringContent<T>(model);
                 responseMessage = client.PutAsync(uri, data).Result;
-                SetResponse<T>();
+                List<T> lst = new List<T>();
+                lst.Add((T)SetResponse<T>());
+                return lst;
             }
             catch (Exception ex)
             {
                 Responses.StatusCode = (int)responseMessage.StatusCode;
                 Responses.Error = ex.ToString();
+                return null;
             }
 
         }

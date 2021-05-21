@@ -41,7 +41,7 @@ function GetTraining(id) {
 
 async function Add() {
     var form = document.getElementById("form");
-    await  window.add("/Ubicaciones/Add", form, ["Id", "Descripción", "Activo", "Fecha Alta"])
+    window.add("/Ubicaciones/Add", form, arrayColumnsTable, true, arrayCellsData)
 }
 
 
