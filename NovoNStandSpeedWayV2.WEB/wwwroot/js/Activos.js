@@ -1,17 +1,17 @@
 ﻿
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    $.get("/Home/DropDownUbicacion", function (data) {
-        window.llenarCombo(data, document.getElementById("UbicacionIdVar"), true)
-    });
+    //$.get("/Home/DropDownUbicacion", function (data) {
+    //    window.llenarCombo(data, document.getElementById("UbicacionIdVar"), true)
+    //});
 
-    $.get("/Home/DropDownCentroDeCostos", function (data) {
-        window.llenarCombo(data, document.getElementById("CentroCostosIdVar"), true)
-    });
+    //$.get("/Home/DropDownCentroDeCostos", function (data) {
+    //    window.llenarCombo(data, document.getElementById("CentroCostosIdVar"), true)
+    //});
 
-    $.get("/Home/DropDownFormaAdquisicion", function (data) {
-        window.llenarCombo(data, document.getElementById("FormaAdquisicionIdInt"), true)
-    });
+    //$.get("/Home/DropDownFormaAdquisicion", function (data) {
+    //    window.llenarCombo(data, document.getElementById("FormaAdquisicionIdInt"), true)
+    //});
 
     window.list("/Activos/List", ["Id", "Descripción", "Estado Activo", "Fecha Adquisición"], 0, null);
 
